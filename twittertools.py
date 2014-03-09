@@ -8,9 +8,16 @@ class TwitterTimeline:
 		self.timeline = api.user_timeline(user_id, max_id=max_id)
 
 		# strip the timeline of retweeted tweets.
+		tweetsToRemove = []
+
+		# find all the tweets to be removed from the full list.
 		for tweet in self.timeline:
 			if hasattr(tweet, 'retweeted_status'):
-				self.timeline.remove(tweet)
+				tweetsToRemove.append(tweet)
+
+		# remove all the retweets.
+		for tweetToRemove in tweetsToRemove:
+			self.timeline.remove(tweetToRemove)
 
 	def get_tweets(self):
 		return self.timeline
@@ -72,4 +79,3 @@ class TwitterInterface:
 	def __twittertime_to_unixtime(self, twittertime):
 		"""Converts Twitter time from created_at to a unix timestamp"""
 		return calendar.timegm(twittertime.utctimetuple())
-
