@@ -1,5 +1,6 @@
 import tweepy
 import time
+import calendar
 
 class TwitterTimeline:
 	"""Class that represents the Twitter timeline of a user. Does not contain retweets"""
@@ -11,7 +12,7 @@ class TwitterTimeline:
 			if hasattr(tweet, 'retweeted_status'):
 				self.timeline.remove(tweet)
 
-	def get_tweets():
+	def get_tweets(self):
 		return self.timeline
 
 class TwitterInterface:
@@ -30,7 +31,7 @@ class TwitterInterface:
 
 			Returns a two-element list where the first element are updated handle_records, and the second is the list of tweets
 		"""
-		all_tweets = __get_all_tweets(self.api, handle_records, num_tweets)
+		all_tweets = self.__get_all_tweets(self.api, handle_records, num_tweets)
 
 		# get the top num_tweets tweets
 		most_recent_tweets = all_tweets[:num_tweets]
@@ -43,15 +44,16 @@ class TwitterInterface:
 
 		return handle_records, most_recent_tweets
 
-	def __get_all_tweets(api, handle_records, num_tweets):
+	def __get_all_tweets(self, api, handle_records, num_tweets):
 		"""
 			Takes in an api object, the handle records, and the number of tweets to get from each handle.
 		"""
+		all_tweets = []
+
 		# create a list of all the tweets from the handle_records
-		for handle_record in handles_records:
+		for handle_record in handle_records:
 			# extract the handle name and the max id from the two-element list.
-			handle_name = handle_record[0]
-			max_id = handle_record[1]
+			[handle_name, max_id] = handle_record
 
 			# check if max_id is empty string, if it is then use default max_id
 			if not max_id:
@@ -60,11 +62,14 @@ class TwitterInterface:
 				timeline = TwitterTimeline(self.api, handle_name, num_tweets, max_id)
 
 			# Adds the tweets from the timeline to the list of all tweets.
-			all_tweets.extend(timeline)
+			all_tweets.extend(timeline.get_tweets())
 
 		# sort the list of all tweets by date in descending order
-		all_tweets.sort(key=lambda tweet: __twittertime_to_unixtime(tweet.created_at), reverse=True)
+		all_tweets.sort(key=lambda tweet: self.__twittertime_to_unixtime(tweet.created_at), reverse=True)
 
-	def __twittertime_to_unixtime(twittertime):
+		return all_tweets
+
+	def __twittertime_to_unixtime(self, twittertime):
 		"""Converts Twitter time from created_at to a unix timestamp"""
-		return time.mktime(time.strptime(twittertime,'%a %b %d %H:%M:%S +0000 %Y'))
+		return calendar.timegm(twittertime.utctimetuple())
+
