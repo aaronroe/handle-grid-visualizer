@@ -1,0 +1,10 @@
+{
+  "name": "Handle-Grid-Visualizer",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "latest",
+    "bootstrap": "latest",
+    "ngInfiniteScroll": "latest",
+    "masonry": "latest"
+  }
+}
