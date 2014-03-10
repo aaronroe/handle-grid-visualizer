@@ -1,0 +1,8 @@
+/* Button for adding handles */
+.btn-add-handle {
+	background-color: #fff;
+	cursor: pointer;
+}
+.btn-add-handle:hover {
+	background-color: #ebebeb;
+}
