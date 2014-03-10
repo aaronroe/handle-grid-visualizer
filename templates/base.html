@@ -3,8 +3,19 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Handle Grid Visualizer</title>
+
+		{% block css %}
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+		{% endblock %}
 	</head>
 	<body>
 		{% block body %}{% endblock %}
+
+		{% block js %}
+		<script src="{{url_for('static', filename='bower_components/jquery/dist/jquery.min.js')}}" type="text/javascript"></script>
+		<script src="{{url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js')}}" type="text/javascript"></script>
+		<script src="{{url_for('static', filename='bower_components/angular/angular.min.js')}}" type="text/javascript"></script>
+		{% endblock %}
 	</body>
 </html>
