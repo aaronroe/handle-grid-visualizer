@@ -6,3 +6,7 @@
 .btn-add-handle:hover {
 	background-color: #ebebeb;
 }
+.handle-badge {
+	padding: 5px;
+	margin: 5px;
+}

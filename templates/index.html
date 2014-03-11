@@ -6,10 +6,9 @@
 		<input ng-model="handleInput" type="text" class="form-control" placeholder="Handle">
 		<span ng-click="addHandle()" class="input-group-addon btn-add-handle"><span class="glyphicon glyphicon-plus"></span></span>
 	</div>
-	<ul>
-		<li ng-repeat="handle in handleList">
+	<span ng-repeat="handle in handleList" class="badge handle-badge">
 			{{ '{{' }}handle{{ '}}' }}
-		</li>
-	</ul>
+			<span class="glyphicon glyphicon-remove"></span>
+	</span>
 </div>
 {% endblock %}
