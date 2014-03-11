@@ -14,4 +14,9 @@ handleVisApp.controller('indexCtrl', function($scope) {
 			$scope.handleInput = "";
 		}
 	};
+
+	// function when a handle is to be removed.
+	$scope.removeHandle = function(index) {
+		$scope.handleList.splice(index, 1);
+	};
 });

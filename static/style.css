@@ -6,7 +6,12 @@
 .btn-add-handle:hover {
 	background-color: #ebebeb;
 }
+
+/* Badge for handle names */
 .handle-badge {
 	padding: 5px;
 	margin: 5px;
+}
+.handle-badge-remove {
+	cursor: pointer;
 }

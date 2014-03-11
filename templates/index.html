@@ -8,7 +8,7 @@
 	</div>
 	<span ng-repeat="handle in handleList" class="badge handle-badge">
 			{{ '{{' }}handle{{ '}}' }}
-			<span class="glyphicon glyphicon-remove"></span>
+			<span ng-click="removeHandle($index)" class="glyphicon glyphicon-remove handle-badge-remove"></span>
 	</span>
 </div>
 {% endblock %}
