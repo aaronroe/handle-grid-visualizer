@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block body %}
-<div ng-controller="indexCtrl" class="input-group">
-	<span class="input-group-addon">@</span>
-	<input type="text" class="form-control" placeholder="Handle">
-	<span class="input-group-addon btn-add-handle"><span class="glyphicon glyphicon-plus"></span></span>
-<!-- 	<button type="button" class="btn btn-default btn-lg input-group-addon">
-		<span class="glyphicon glyphicon-star"></span> Star
-	</button> -->
+<div ng-controller="indexCtrl">
+	<div class="input-group">
+		<span class="input-group-addon">@</span>
+		<input ng-model="handleInput" type="text" class="form-control" placeholder="Handle">
+		<span ng-click="addHandle()" class="input-group-addon btn-add-handle"><span class="glyphicon glyphicon-plus"></span></span>
+	</div>
+	<ul>
+		<li ng-repeat="handle in handleList">
+			{{ '{{' }}handle{{ '}}' }}
+		</li>
+	</ul>
 </div>
 {% endblock %}
