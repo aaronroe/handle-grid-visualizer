@@ -7,7 +7,7 @@ handleVisApp.controller('indexCtrl', function($scope) {
 	// function when a handle is to be added.
 	$scope.addHandle = function() {
 		// only add value that is new.
-		if ($.inArray($scope.handleInput, $scope.handleList) == -1) {
+		if ($scope.handleInput != null && $scope.handleInput != "" && $.inArray($scope.handleInput, $scope.handleList) == -1) {
 			$scope.handleList.push($scope.handleInput)
 			
 			// clear the input.
