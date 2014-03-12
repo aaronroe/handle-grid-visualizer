@@ -3,11 +3,11 @@
 <div ng-controller="indexCtrl">
 	<div class="input-group">
 		<span class="input-group-addon">@</span>
-		<input ng-model="handleInput" type="text" class="form-control" placeholder="Handle">
+		<input ng-model="handleInput" type="text" class="form-control" placeholder="Twitter Handle">
 		<span ng-click="addHandle()" class="input-group-addon btn-add-handle"><span class="glyphicon glyphicon-plus"></span></span>
 	</div>
 	<span ng-repeat="handle in handleList" class="badge handle-badge">
-			{{ '{{' }}handle{{ '}}' }}
+			@{{ '{{' }}handle{{ '}}' }}
 			<span ng-click="removeHandle($index)" class="glyphicon glyphicon-remove handle-badge-remove"></span>
 	</span>
 </div>
