@@ -1,8 +1,11 @@
-var handleVisApp = angular.module('handleVisApp', []);
+var handleVisApp = angular.module('handleVisApp', ['infinite-scroll']);
 
 handleVisApp.controller('indexCtrl', function($scope) {
 	// the list of handles to be processed.
 	$scope.handleList = []
+
+	// the list of tweets to be displayed.
+	$scope.tweets = []
 
 	// function when a handle is to be added.
 	$scope.addHandle = function() {
@@ -18,5 +21,13 @@ handleVisApp.controller('indexCtrl', function($scope) {
 	// function when a handle is to be removed.
 	$scope.removeHandle = function(index) {
 		$scope.handleList.splice(index, 1);
+	};
+
+	// adds more tweets to the page.
+	$scope.loadMoreTweets = function() {
+    // var last = $scope.tweets[$scope.tweets.length - 1];
+    // for(var i = 1; i <= 8; i++) {
+    //   $scope.tweets.push(last + i);
+    // }
 	};
 });
