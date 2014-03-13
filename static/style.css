@@ -15,3 +15,7 @@
 .handle-badge-remove {
 	cursor: pointer;
 }
+
+.twitter-tweet {
+	display: inline-block !important;
+}

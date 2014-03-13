@@ -10,14 +10,12 @@
 			@{{ '{{' }}handle{{ '}}' }}
 			<span ng-click="removeHandle($index)" class="glyphicon glyphicon-remove handle-badge-remove"></span>
 	</span>
-	<div>
-		<div infinite-scroll="loadMoreTweets()" infinite-scroll-distance="1">
-			<div ng-repeat="tweet in tweets">
-				<blockquote class="twitter-tweet" lang="en"><p>might do some subwars or some onstream sub stuff or something not involving playing later on or sometime in the week</p>&mdash; Marcus (@LoLDyrus) <a href="https://twitter.com/LoLDyrus/statuses/443936196398301184">March 13, 2014</a></blockquote>
-				<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-			</div>
-			<!-- <img ng-repeat="tweet in tweets" ng-src="http://placehold.it/225x250&text={{'{{'}}tweet{{'}}'}}"> -->
+	<div infinite-scroll="loadMoreTweets()" infinite-scroll-distance="1">
+		<span ng-repeat="tweet in tweets">
+			<blockquote class="twitter-tweet" lang="en"><p>might do some subwars or some onstream sub stuff or something not involving playing later on or sometime in the week</p>&mdash; Marcus (@LoLDyrus) <a href="https://twitter.com/LoLDyrus/statuses/443936196398301184">March 13, 2014</a></blockquote>
+			<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 		</div>
+		<!-- <img ng-repeat="tweet in tweets" ng-src="http://placehold.it/225x250&text={{'{{'}}tweet{{'}}'}}"> -->
 	</div>
 </div>
 {% endblock %}
