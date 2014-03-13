@@ -11,8 +11,8 @@
 			<span ng-click="removeHandle($index)" class="glyphicon glyphicon-remove handle-badge-remove"></span>
 	</span>
 	<div>
-		<div infinite-scroll="loadMoreTweets()" infinite-scroll-distance="0">
-			<img ng-repeat='tweet in tweets' ng-src='http://placehold.it/225x250&text={{tweet}}'>
+		<div infinite-scroll="loadMoreTweets()" infinite-scroll-distance="1">
+			<img ng-repeat="tweet in tweets" ng-src="http://placehold.it/225x250&text={{'{{'}}tweet{{'}}'}}">
 		</div>
 	</div>
 </div>

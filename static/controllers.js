@@ -5,7 +5,7 @@ handleVisApp.controller('indexCtrl', function($scope) {
 	$scope.handleList = []
 
 	// the list of tweets to be displayed.
-	$scope.tweets = []
+	$scope.tweets = [1]
 
 	// function when a handle is to be added.
 	$scope.addHandle = function() {
@@ -25,9 +25,9 @@ handleVisApp.controller('indexCtrl', function($scope) {
 
 	// adds more tweets to the page.
 	$scope.loadMoreTweets = function() {
-    // var last = $scope.tweets[$scope.tweets.length - 1];
-    // for(var i = 1; i <= 8; i++) {
-    //   $scope.tweets.push(last + i);
-    // }
+    var last = $scope.tweets[$scope.tweets.length - 1];
+    for(var i = 1; i <= 14; i++) {
+      $scope.tweets.push(last + i);
+    }
 	};
 });
