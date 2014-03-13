@@ -4,7 +4,6 @@
   "dependencies": {
     "angular": "latest",
     "bootstrap": "latest",
-    "ngInfiniteScroll": "latest",
-    "angular-masonry": "latest"
+    "ngInfiniteScroll": "latest"
   }
 }
