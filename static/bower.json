@@ -5,6 +5,6 @@
     "angular": "latest",
     "bootstrap": "latest",
     "ngInfiniteScroll": "latest",
-    "masonry": "latest"
+    "angular-masonry": "latest"
   }
 }
