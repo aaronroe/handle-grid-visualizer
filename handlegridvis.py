@@ -21,7 +21,7 @@ def get_more_tweets(handle_records_json):
 	
 	interface = TwitterInterface(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 	
-	return str(handle_records)	
+	return json.dumps(handle_records)
 
 if __name__ == "__main__":
   app.run(debug=True)
