@@ -49,16 +49,16 @@ class TwitterInterface:
 				if tweet.user.screen_name == handle_record['name']:
 					handle_record['max_id'] = tweet.id_str
 
-		return handle_records, self.__status_to_dict(most_recent_tweets)
+		return handle_records, self.__statuses_to_dicts(most_recent_tweets)
 
-	def __status_to_dict(self, statuses):
+	def __statuses_to_dicts(self, statuses):
 		"""Takes in a list of Tweepy statuses and returns a list of standard python dicts"""
 		dicts = []
 
 		for status in statuses:
 			status_dict = {}
 			
-			# text content of the tweet.
+			# choice attributes from list at https://dev.twitter.com/docs/platform-objects
 			status_dict['text'] = status.text
 			status_dict['created_at'] = self.__twittertime_to_unixtime(status.created_at)
 			status_dict['id_str'] = status.id_str
@@ -66,11 +66,21 @@ class TwitterInterface:
 			status_dict['retweet_count'] = status.retweet_count
 			status_dict['source'] = status.source
 			# todo: make the user object a normal python dict as well.
-			# status_dict['user'] = status.user
+			status_dict['user'] = self.__user_to_dict(status.user)
 
 			dicts.append(status_dict)
 
 		return dicts
+
+	def __user_to_dict(self, user):
+		"""Takes in a Tweepy user and returns a standard python dict"""
+		user_dict = {}
+
+		# choice attributes from list at https://dev.twitter.com/docs/platform-objects
+		user_dict['screen_name'] = user.screen_name
+		user_dict['name'] = user.name
+
+		return user_dict
 
 	def __get_all_tweets(self, api, handle_records, num_tweets):
 		"""
