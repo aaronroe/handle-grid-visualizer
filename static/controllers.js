@@ -7,6 +7,9 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
 	// the list of tweets to be displayed.
 	$scope.tweets = []
 
+	// whether or not there are tweets loading.
+	$scope.loading = false;
+
 	// function when a handle is to be added.
 	$scope.addHandleRecord = function() {
 		// only add value that is new.
@@ -37,9 +40,13 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
 
 	// adds more tweets to the page.
 	$scope.loadMoreTweets = function() {
+		$scope.loading = true;
+
     $http.get('tweets/' + encodeURIComponent(JSON.stringify($scope.handleRecords))).then(function(result) {
       	$scope.handleRecords = result.data.handle_records;
       	$scope.tweets.push.apply($scope.tweets, result.data.next_tweets);
+
+      	$scope.loading = false;
     });
 	};
 

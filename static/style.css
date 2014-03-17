@@ -24,3 +24,18 @@
 	padding: 10px;
 	display: inline;
 }
+
+.loading {
+	font-size: 40px;
+	text-align: center;
+	padding: 20px;
+}
+
+.loading-icon {
+	display: inline-table;
+	margin-top: 5px;
+}
+
+.hidden {
+	display: none;
+}
