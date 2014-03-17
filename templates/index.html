@@ -11,12 +11,12 @@
 		<span ng-click="removeHandleRecord($index)" class="glyphicon glyphicon-remove handle-badge-remove"></span>
 	</span>
 	<div infinite-scroll="loadMoreTweets()" infinite-scroll-distance="0">
-		<span class="tweet-container" ng-repeat="tweet in tweets">
+		<div class="tweet-container" ng-repeat="tweet in tweets">
 			{% raw %}
 			<blockquote class="twitter-tweet" lang="en"><p>{{tweet.text}}</p>&mdash; {{tweet.user.name}} (@{{tweet.user.screen_name}}) <a href="https://twitter.com/LoLDyrus/statuses/{{tweet.id_str}}">{{tweet.created_at}}</a></blockquote>
 			<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 			{% endraw %}
-		</span>
+		</div>
 	</div>
 </div>
 {% endblock %}
