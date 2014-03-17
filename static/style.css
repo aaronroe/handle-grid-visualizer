@@ -19,3 +19,7 @@
 .twitter-tweet {
 	display: inline-block !important;
 }
+
+.tweet-container {
+	padding: 10px;
+}

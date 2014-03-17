@@ -24,6 +24,8 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
 	// function when a handle is to be removed.
 	$scope.removeHandleRecord = function(index) {
 		$scope.handleRecords.splice(index, 1);
+
+		refreshTweets();
 	};
 
 	// adds more tweets to the page.
