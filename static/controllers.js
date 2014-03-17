@@ -16,7 +16,8 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
 			// clear the input.
 			$scope.handleInput = "";
 
-			$scope.loadMoreTweets();
+			// clear the stream of tweets.
+			refreshTweets();
 		}
 	};
 
@@ -31,12 +32,22 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
       	$scope.handleRecords = result.data.handle_records;
       	$scope.tweets.push.apply($scope.tweets, result.data.next_tweets);
     });
-
-    // var last = $scope.tweets[$scope.tweets.length - 1];
-    // for(var i = 1; i <= 14; i++) {
-    //   $scope.tweets.push(last + i);
-    // }
 	};
+
+	/**
+	 * Helper function that refreshes the tweet stream from the beginning.
+	 */
+	function refreshTweets() {
+		// clear tweets
+		$scope.tweets = [];
+		
+		// reset all the handle records.
+		for (var i = 0; i < $scope.handleRecords.length; i++) {
+			$scope.handleRecords[i].max_id = '';
+		}
+
+		$scope.loadMoreTweets();
+	}
 
 	/**
 	 * Helper function that determines whether a handle has already been added to the list of handle records.
