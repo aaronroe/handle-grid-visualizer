@@ -5,7 +5,7 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
 	$scope.handleRecords = [];
 
 	// the list of tweets to be displayed.
-	$scope.tweets = [1]
+	$scope.tweets = []
 
 	// function when a handle is to be added.
 	$scope.addHandleRecord = function() {
@@ -15,6 +15,8 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
 			
 			// clear the input.
 			$scope.handleInput = "";
+
+			$scope.loadMoreTweets();
 		}
 	};
 
@@ -26,13 +28,14 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
 	// adds more tweets to the page.
 	$scope.loadMoreTweets = function() {
     $http.get('tweets/' + encodeURIComponent(JSON.stringify($scope.handleRecords))).then(function(result) {
-      
+      	$scope.handleRecords = result.data.handle_records;
+      	$scope.tweets.push.apply($scope.tweets, result.data.next_tweets);
     });
 
-    var last = $scope.tweets[$scope.tweets.length - 1];
-    for(var i = 1; i <= 14; i++) {
-      $scope.tweets.push(last + i);
-    }
+    // var last = $scope.tweets[$scope.tweets.length - 1];
+    // for(var i = 1; i <= 14; i++) {
+    //   $scope.tweets.push(last + i);
+    // }
 	};
 
 	/**
