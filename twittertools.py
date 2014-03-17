@@ -34,9 +34,9 @@ class TwitterInterface:
 
 	def get_recent_tweets(self, handle_records, num_tweets):
 		"""
-			Takes in a list of two-element lists [handle_name, max_id], and the number of tweets (max 200) to return.
+			Takes in a list of handle records {'name':, 'max_id':}, and the number of tweets (max 200) to return.
 
-			Returns a two-element list where the first element are updated handle_records, and the second is the list of tweets
+			Returns a dict with updated handle_records and list of tweets {'handle_records':, 'tweets':}
 		"""
 		all_tweets = self.__get_all_tweets(self.api, handle_records, num_tweets)
 
@@ -46,8 +46,8 @@ class TwitterInterface:
 		# update handle records
 		for tweet in most_recent_tweets:
 			for handle_record in handle_records:
-				if tweet.user.screen_name == handle_record[0]:
-					handle_record[1] = tweet.id_str
+				if tweet.user.screen_name == handle_record['name']:
+					handle_record['max_id'] = tweet.id_str
 
 		return handle_records, self.__status_to_dict(most_recent_tweets)
 
@@ -68,8 +68,6 @@ class TwitterInterface:
 			# todo: make the user object a normal python dict as well.
 			# status_dict['user'] = status.user
 
-			print status_dict
-
 			dicts.append(status_dict)
 
 		return dicts
@@ -82,14 +80,11 @@ class TwitterInterface:
 
 		# create a list of all the tweets from the handle_records
 		for handle_record in handle_records:
-			# extract the handle name and the max id from the two-element list.
-			[handle_name, max_id] = handle_record
-
 			# check if max_id is empty string, if it is then use default max_id
-			if not max_id:
-				timeline = TwitterTimeline(self.api, handle_name, num_tweets)
+			if not handle_record['max_id']:
+				timeline = TwitterTimeline(self.api, handle_record['name'], num_tweets)
 			else:
-				timeline = TwitterTimeline(self.api, handle_name, num_tweets, max_id)
+				timeline = TwitterTimeline(self.api, handle_record['name'], num_tweets, handle_record['max_id'])
 
 			# Adds the tweets from the timeline to the list of all tweets.
 			all_tweets.extend(timeline.get_tweets())

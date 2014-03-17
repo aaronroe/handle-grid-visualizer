@@ -22,6 +22,7 @@ def get_more_tweets(handle_records_json):
 	interface = TwitterInterface(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
 	# get updated handle_records and last twenty tweets.
+	print handle_records
 	updated_handle_records, next_tweets = interface.get_recent_tweets(handle_records, 20)
 	
 	return json.dumps({"handle_records":updated_handle_records, "next_tweets":next_tweets})

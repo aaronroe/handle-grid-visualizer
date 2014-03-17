@@ -1,7 +1,7 @@
 var handleVisApp = angular.module('handleVisApp', ['infinite-scroll']);
 
 handleVisApp.controller('indexCtrl', function($scope, $http) {
-	// the records for the handles, which are [handle_name, max_id] two-element arrays.
+	// the records for the handles, which are {'name':, 'max_id'} dicts.
 	$scope.handleRecords = [];
 
 	// the list of tweets to be displayed.
@@ -11,7 +11,7 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
 	$scope.addHandleRecord = function() {
 		// only add value that is new.
 		if ($scope.handleInput != null && $scope.handleInput != "" && !handleAdded($scope.handleInput)) {
-			$scope.handleRecords.push([$scope.handleInput, '']);
+			$scope.handleRecords.push({"name":$scope.handleInput, "max_id":''});
 			
 			// clear the input.
 			$scope.handleInput = "";
@@ -38,9 +38,9 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
 	/**
 	 * Helper function that determines whether a handle has already been added to the list of handle records.
 	 */
-	function handleAdded(handle) {
+	function handleAdded(handleName) {
 		for (var i = 0; i < $scope.handleRecords.length; i++) {
-			if ($scope.handleRecords[i][0] === handle) {
+			if ($scope.handleRecords[i].name === handleName) {
 				return true;
 			}
 		}
