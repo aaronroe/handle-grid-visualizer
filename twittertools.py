@@ -5,6 +5,9 @@ import calendar
 class TwitterTimeline:
 	"""Class that represents the Twitter timeline of a user. Does not contain retweets"""
 	def __init__(self, api, user_id, num_tweets, max_id='999999999999999999'):
+		# make sure that we dont repeat a tweet.
+		max_id = str(int(max_id) - 1)
+
 		self.timeline = api.user_timeline(user_id, max_id=max_id)
 
 		# strip the timeline of retweeted tweets.
