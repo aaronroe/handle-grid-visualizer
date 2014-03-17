@@ -3,7 +3,7 @@
 <div ng-controller="indexCtrl">
 	<div class="input-group">
 		<span class="input-group-addon">@</span>
-		<input ng-model="handleInput" type="text" class="form-control" placeholder="Twitter Handle">
+		<input ng-model="handleInput" ng-keypress="enterPressed($event)" type="text" class="form-control" placeholder="Twitter Handle">
 		<span ng-click="addHandleRecord()" class="input-group-addon btn-add-handle"><span class="glyphicon glyphicon-plus"></span></span>
 	</div>
 	<span ng-repeat="handleRecord in handleRecords" class="badge handle-badge">

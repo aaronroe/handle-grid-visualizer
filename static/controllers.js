@@ -21,6 +21,13 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
 		}
 	};
 
+	// function when enter is pressed for the input box.
+	$scope.enterPressed = function(keyPressed) {
+		if (keyPressed.keyCode == 13 && $scope.handleInput != null && $scope.handleInput != "") {
+			$scope.addHandleRecord();
+		}
+	};
+
 	// function when a handle is to be removed.
 	$scope.removeHandleRecord = function(index) {
 		$scope.handleRecords.splice(index, 1);
