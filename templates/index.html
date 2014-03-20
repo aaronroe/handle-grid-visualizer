@@ -6,18 +6,21 @@
 		<input ng-model="handleInput" ng-keypress="enterPressed($event)" type="text" class="form-control" placeholder="Twitter Handle">
 		<span ng-click="addHandleRecord()" class="input-group-addon btn-add-handle"><span class="glyphicon glyphicon-plus"></span></span>
 	</div>
+
 	<span ng-repeat="handleRecord in handleRecords" class="badge handle-badge">
 		@{{ '{{' }}handleRecord.name{{ '}}' }}
 		<span ng-click="removeHandleRecord($index)" class="glyphicon glyphicon-remove handle-badge-remove"></span>
 	</span>
+	
 	<div infinite-scroll="loadMoreTweets()" infinite-scroll-distance="0">
-		<div class="tweet-container" ng-repeat="tweet in tweets">
+		<div id="{{ '{{' }}$index{{ '}}' }}" class="tweet-container" ng-repeat="tweet in tweets">
 			{% raw %}
 			<blockquote class="twitter-tweet" lang="en"><p>{{tweet.text}}</p>&mdash; {{tweet.user.name}} (@{{tweet.user.screen_name}}) <a href="https://twitter.com/LoLDyrus/statuses/{{tweet.id_str}}">{{tweet.created_at}}</a></blockquote>
 			<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 			{% endraw %}
 		</div>
 	</div>
+	
 	<div class="loading" ng-class="{hidden: !loading}">
 		<span class="glyphicon glyphicon-cog loading-icon"></span> Loading tweets...
 	</div>

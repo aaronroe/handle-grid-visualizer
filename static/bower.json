@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "latest",
     "bootstrap": "latest",
-    "ngInfiniteScroll": "latest"
+    "ngInfiniteScroll": "latest",
+    "verge": "latest"
   }
 }

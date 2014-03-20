@@ -1,6 +1,6 @@
 var handleVisApp = angular.module('handleVisApp', ['infinite-scroll']);
 
-handleVisApp.controller('indexCtrl', function($scope, $http) {
+handleVisApp.controller('indexCtrl', function($scope, $http, $timeout) {
 	// the records for the handles, which are {'name':, 'max_id'} dicts.
 	$scope.handleRecords = [];
 
@@ -47,6 +47,13 @@ handleVisApp.controller('indexCtrl', function($scope, $http) {
       	$scope.tweets.push.apply($scope.tweets, result.data.next_tweets);
 
       	$scope.loading = false;
+    		
+    		// check to see if the last element is still in the user viewport. If it is, load more elements.
+    		$timeout(function() {
+    			if (verge.inViewport($('#'+($scope.tweets.length-1).toString()))) {
+    				$scope.loadMoreTweets();
+    				}
+    		});
     });
 	};
 
