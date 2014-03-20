@@ -52,7 +52,7 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout) {
     		$timeout(function() {
     			if (verge.inViewport($('#'+($scope.tweets.length-1).toString()))) {
     				$scope.loadMoreTweets();
-    				}
+  				}
     		});
     });
 	};
