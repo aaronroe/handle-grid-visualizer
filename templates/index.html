@@ -9,7 +9,6 @@
 
 	<div class="alert alert-danger" ng-class="{hidden: !error}">You have already added this handle!</div>
 
-
 	<span ng-repeat="handleRecord in handleRecords" class="badge handle-badge">
 		@{{ '{{' }}handleRecord.name{{ '}}' }}
 		<span ng-click="removeHandleRecord($index)" class="glyphicon glyphicon-remove handle-badge-remove"></span>

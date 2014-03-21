@@ -1,6 +1,8 @@
-var handleVisApp = angular.module('handleVisApp', ['infinite-scroll']);
+var handleVisApp = angular.module('handleVisApp', ['infinite-scroll'], function($locationProvider) {
+	$locationProvider.html5Mode(true);
+});
 
-handleVisApp.controller('indexCtrl', function($scope, $http, $timeout) {
+handleVisApp.controller('indexCtrl', function($scope, $http, $timeout, $location) {
 	// the records for the handles, which are {'name':, 'max_id'} dicts.
 	$scope.handleRecords = [];
 
@@ -13,11 +15,14 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout) {
 	// whether or not an error is to be displayed.
 	$scope.error = false;
 
+	// if there are GET params, init with them.
+	initWithGETParams();
+
 	// function when a handle is to be added.
 	$scope.addHandleRecord = function() {
 		// only add value that is new.
 		if ($scope.handleInput != null && $scope.handleInput != "" && !handleAdded($scope.handleInput)) {
-			$scope.handleRecords.push({"name":$scope.handleInput, "max_id":''});
+			$scope.handleRecords.push({"name":$scope.handleInput, "max_id":""});
 			
 			// clear the input.
 			$scope.handleInput = "";
@@ -66,6 +71,23 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout) {
 	};
 
 	/**
+	 * Initializes data with GET parameters.
+	 */
+	function initWithGETParams() {
+		try {
+			var handles = JSON.parse($location.search().handles);
+			for (var i = 0; i < handles.length; i++) {
+				$scope.handleRecords.push({"name": handles[i], "max_id": ""});
+			}
+
+			refreshTweets();
+		}
+		catch(e) {
+			console.log('Invalid handle record specified in the URL');
+		}
+	}
+
+	/**
 	 * Helper function that refreshes the tweet stream from the beginning.
 	 */
 	function refreshTweets() {
@@ -95,13 +117,3 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout) {
 		return false;
 	}
 });
-
-// handleVisApp.config(function($routeProvider, $locationProvider) {
-// 	$routeProvider
-// 		.when('/:handles', {
-// 			templateURL: '/:handles',
-// 			controller: 'indexCtrl'
-// 		});
-
-// 	$locationProvider.html5Mode(true);
-// });
