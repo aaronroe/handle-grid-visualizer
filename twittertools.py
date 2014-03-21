@@ -49,7 +49,7 @@ class TwitterInterface:
 		# update handle records
 		for tweet in most_recent_tweets:
 			for handle_record in handle_records:
-				if tweet.user.screen_name == handle_record['name']:
+				if tweet.user.screen_name.lower() == handle_record['name'].lower():
 					handle_record['max_id'] = tweet.id_str
 
 		return handle_records, self.__statuses_to_dicts(most_recent_tweets)

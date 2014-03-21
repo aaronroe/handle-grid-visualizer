@@ -10,6 +10,9 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout) {
 	// whether or not there are tweets loading.
 	$scope.loading = false;
 
+	// whether or not an error is to be displayed.
+	$scope.error = false;
+
 	// function when a handle is to be added.
 	$scope.addHandleRecord = function() {
 		// only add value that is new.
@@ -37,6 +40,11 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout) {
 
 		refreshTweets();
 	};
+
+	// a watch over the handle input. If the user starts typing, remove the error message.
+	$scope.$watch('handleInput', function(newVal){
+    $scope.error = false;
+  });
 
 	// adds more tweets to the page.
 	$scope.loadMoreTweets = function() {
@@ -77,10 +85,23 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout) {
 	 */
 	function handleAdded(handleName) {
 		for (var i = 0; i < $scope.handleRecords.length; i++) {
-			if ($scope.handleRecords[i].name === handleName) {
+			if ($scope.handleRecords[i].name.toLowerCase() === handleName.toLowerCase()) {
+				// if the handle has been added, show the error.
+				$scope.error = true;
+
 				return true;
 			}
 		}
 		return false;
 	}
 });
+
+// handleVisApp.config(function($routeProvider, $locationProvider) {
+// 	$routeProvider
+// 		.when('/:handles', {
+// 			templateURL: '/:handles',
+// 			controller: 'indexCtrl'
+// 		});
+
+// 	$locationProvider.html5Mode(true);
+// });
