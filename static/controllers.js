@@ -24,6 +24,8 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout, $location
 		if ($scope.handleInput != null && $scope.handleInput != "" && !handleAdded($scope.handleInput)) {
 			$scope.handleRecords.push({"name":$scope.handleInput, "max_id":""});
 			
+			addToGETParams($scope.handleInput);
+			
 			// clear the input.
 			$scope.handleInput = "";
 
@@ -84,6 +86,25 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout, $location
 		}
 		catch(e) {
 			console.log('Invalid handle record specified in the URL');
+		}
+	}
+
+	/**
+	 * Adds a handle to the list of handles in the URL.
+	 */
+	function addToGETParams(handleName) {
+		try {
+			var handles = JSON.parse($location.search().handles);
+			
+			handles.push(handleName);
+			var handlesString = JSON.stringify(handles);
+			$location.search({"handles": handlesString});
+
+			refreshTweets();
+		}
+		catch(e) {
+			console.log('Invalid handle record specified in the URL');
+			$location.search({"handles": "["+"\""+handleName+"\""+"]"});	
 		}
 	}
 
