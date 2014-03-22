@@ -43,6 +43,8 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout, $location
 
 	// function when a handle is to be removed.
 	$scope.removeHandleRecord = function(index) {
+		removeFromGETParams($scope.handleRecords[index]);
+
 		$scope.handleRecords.splice(index, 1);
 
 		refreshTweets();
@@ -99,12 +101,30 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout, $location
 			handles.push(handleName);
 			var handlesString = JSON.stringify(handles);
 			$location.search({"handles": handlesString});
-
-			refreshTweets();
 		}
 		catch(e) {
 			console.log('Invalid handle record specified in the URL');
 			$location.search({"handles": "["+"\""+handleName+"\""+"]"});	
+		}
+	}
+
+	/**
+	 * Removes a handle from the list of handles in the URL.
+	 */
+	function removeFromGETParams(handle) {
+		try {
+			var handles = JSON.parse($location.search().handles);
+			
+			var indexToRemove = handles.indexOf(handle.name);
+			if (indexToRemove > -1) {
+				handles.splice(indexToRemove, 1);
+			}
+
+			var handlesString = JSON.stringify(handles);
+			$location.search({"handles": handlesString});
+		}
+		catch(e) {
+			console.log('Invalid handle record specified in the URL');
 		}
 	}
 
