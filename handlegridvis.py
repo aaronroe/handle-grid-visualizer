@@ -27,4 +27,4 @@ def get_more_tweets(handle_records_json):
   return json.dumps({"handle_records":updated_handle_records, "next_tweets":next_tweets})
 
 if __name__ == "__main__":
-  app.run()
+  app.run(debug=True)

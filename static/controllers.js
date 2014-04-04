@@ -67,7 +67,7 @@ handleVisApp.controller('indexCtrl', function($scope, $http, $timeout, $location
         
         // check to see if the last element is still in the user viewport. If it is, load more elements.
         $timeout(function() {
-          if (verge.inViewport($('#'+($scope.tweets.length-1).toString()))) {
+          if (result.data.next_tweets.length !== 0 && verge.inViewport($('#'+($scope.tweets.length-1).toString()))) {
             $scope.loadMoreTweets();
           }
         });
