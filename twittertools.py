@@ -3,27 +3,37 @@ import time
 import calendar
 
 class TwitterTimeline:
-  """Class that represents the Twitter timeline of a user. Does not contain retweets"""
-  def __init__(self, api, user_id, num_tweets, max_id='999999999999999999'):
-    # make sure that we dont repeat a tweet.
-    max_id = str(int(max_id) - 1)
+	"""Class that represents the Twitter timeline of a user. Does not contain retweets"""
+	def __init__(self, api, user_id, num_tweets, max_id='999999999999999999'):
+		# make sure that we dont repeat a tweet.
+		max_id = str(int(max_id) - 1)
 
-    self.timeline = api.user_timeline(user_id, max_id=max_id)
+		first_run = True
 
-    # strip the timeline of retweeted tweets.
-    tweetsToRemove = []
+		# strip the timeline of retweeted tweets.
+		tweets_to_remove = []
 
-    # find all the tweets to be removed from the full list.
-    for tweet in self.timeline:
-      if hasattr(tweet, 'retweeted_status'):
-        tweetsToRemove.append(tweet)
+		while len(tweets_to_remove) is num_tweets or first_run:
+			first_run = False
 
-    # remove all the retweets.
-    for tweetToRemove in tweetsToRemove:
-      self.timeline.remove(tweetToRemove)
+			self.timeline = api.user_timeline(user_id, count=num_tweets, max_id=max_id)
 
-  def get_tweets(self):
-    return self.timeline
+			tweets_to_remove = []
+			# find all the tweets to be removed from the full list.
+			for tweet in self.timeline:
+				# Update the max id.
+				if int(tweet.id_str) < int(max_id):
+					max_id = tweet.id_str
+
+				if hasattr(tweet, 'retweeted_status'):
+					tweets_to_remove.append(tweet)
+
+		# remove all the retweets.
+		for tweetToRemove in tweets_to_remove:
+			self.timeline.remove(tweetToRemove)
+
+	def get_tweets(self):
+		return self.timeline
 
 class TwitterInterface:
   """Class that provides clean access to Twitter data"""
