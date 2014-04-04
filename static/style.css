@@ -1,41 +1,41 @@
 /* Button for adding handles */
 .btn-add-handle {
-	background-color: #fff;
-	cursor: pointer;
+  background-color: #fff;
+  cursor: pointer;
 }
 .btn-add-handle:hover {
-	background-color: #ebebeb;
+  background-color: #ebebeb;
 }
 
 /* Badge for handle names */
 .handle-badge {
-	padding: 5px;
-	margin: 5px;
+  padding: 5px;
+  margin: 5px;
 }
 .handle-badge-remove {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .twitter-tweet {
-	display: inline-block !important;
+  display: inline-block !important;
 }
 
 .tweet-container {
-	padding: 10px;
-	display: inline;
+  padding: 10px;
+  display: inline;
 }
 
 .loading {
-	font-size: 40px;
-	text-align: center;
-	padding: 20px;
+  font-size: 40px;
+  text-align: center;
+  padding: 20px;
 }
 
 .loading-icon {
-	display: inline-table;
-	margin-top: 5px;
+  display: inline-table;
+  margin-top: 5px;
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
